@@ -1,7 +1,6 @@
 # Spring Cloud Alibaba Dubbo
 
-基于 Spring Cloud Alibaba Dubbo，  
-实现对内 RPC、对外 REST 接口的脚手架
+> 基于 Spring Cloud Alibaba Dubbo,实现对内 RPC、对外 REST 接口的脚手架
 
 ## 概述
 微服务架构是一种架构思想（架构就是为了解耦），实际的开发方式是分布式系统开发。分布式系统其实就是将原来的单体应用程序（SSM）解耦成一个个独立的服务（利用微服务架构编程思想进行拆分）分别进行部署，这对于用户来说其实是不可见的
@@ -10,7 +9,7 @@
 部署单体应用程序意味着运行一个或多个相同副本的单个较大的应用程序。通常会在每台服务器上配置 N 个服务器（物理或虚拟）并运行 M 个应用程序实例。
 
 微服务应用程序由数十甚至上百个服务组成。服务以不同的语言和框架编写。每个都是一个迷你的应用程序，具有自己特定的部署、资源、扩展和监视要求。
-@[每个容器一个服务实例](http://images.qfdmy.com/FlSOjFKpUZMc5rRoXTm-bABVCa-q@.jpg)
+![每个容器一个服务实例](http://images.qfdmy.com/FlSOjFKpUZMc5rRoXTm-bABVCa-q@.jpg)
 
 ## 应用分层
 ![分层](http://images.qfdmy.com/FqZzmKvXn2DB2_he7FbSW_oq-NkD@.jpg)
