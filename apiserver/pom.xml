@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.tallon</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>apiserver</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <url>https://tallon.ink/</url>
+    <inceptionYear>2020-Now</inceptionYear>
+    <description>开放接口网关层</description>
+
+    <!-- <scm>-->
+    <!-- <connection>scm:git:https://github.com/MrTallon/spring-starter/apiserver.git</connection>-->
+    <!-- <developerConnection>scm:git:https://github.com/MrTallon/spring-starter/apiserver.git</developerConnection>-->
+    <!-- <url>https://github.com/MrTallon/spring-starter/apiserver</url>-->
+    <!-- </scm>-->
+
+    <developers>
+        <developer>
+            <id>tallon</id>
+            <name>YangBo</name>
+            <email>tallonink@gmail.com</email>
+        </developer>
+    </developers>
+
+    <modules>
+        <!-- 服务模块 -->
+    </modules>
+
+    <dependencies>
+        <!-- Spring Cloud -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>

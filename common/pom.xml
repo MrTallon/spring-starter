@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.tallon</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>common</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <url>https://tallon.ink/</url>
+    <inceptionYear>2020-Now</inceptionYear>
+    <description>通用依赖-Commons</description>
+
+    <!-- <scm>-->
+    <!-- <connection>scm:git:https://github.com/MrTallon/spring-starter/commons.git</connection>-->
+    <!-- <developerConnection>scm:git:https://github.com/MrTallon/spring-starter/commons.git</developerConnection>-->
+    <!-- <url>https://github.com/MrTallon/spring-starter/commons</url>-->
+    <!-- </scm>-->
+
+    <developers>
+        <developer>
+            <id>tallon</id>
+            <name>YangBo</name>
+            <email>tallonink@gmail.com</email>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- Commons -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>

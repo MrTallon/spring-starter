@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.tallon</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>manager</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <url>https://tallon.ink/</url>
+    <inceptionYear>2020-Now</inceptionYear>
+    <description>通用处理层</description>
+
+    <!-- <scm>-->
+    <!-- <connection>scm:git:https://github.com/MrTallon/spring-starter/manager.git</connection>-->
+    <!-- <developerConnection>scm:git:https://github.com/MrTallon/spring-starter/manager.git</developerConnection>-->
+    <!-- <url>https://github.com/MrTallon/spring-starter/manager</url>-->
+    <!-- </scm>-->
+
+    <developers>
+        <developer>
+            <id>tallon</id>
+            <name>YangBo</name>
+            <email>tallonink@gmail.com</email>
+        </developer>
+    </developers>
+
+    <modules>
+        <!-- 服务模块 -->
+    </modules>
+
+    <dependencies>
+        <!-- Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Commons -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Projects -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+</project>
