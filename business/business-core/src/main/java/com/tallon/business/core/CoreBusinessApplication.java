@@ -14,7 +14,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan(basePackages = "com.tallon.repository.core.mapper")
 public class CoreBusinessApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(CoreBusinessApplication.class, args);
-    }
+
+	public static void main(String[] args) {
+		SpringApplication.run(CoreBusinessApplication.class, args);
+	}
+
 }

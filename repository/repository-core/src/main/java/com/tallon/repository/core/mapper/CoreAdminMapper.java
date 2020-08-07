@@ -13,5 +13,4 @@ import com.tallon.repository.core.domain.CoreAdmin;
  */
 public interface CoreAdminMapper extends BaseMapper<CoreAdmin> {
 
-
 }

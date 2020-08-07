@@ -8,13 +8,15 @@ package com.tallon.repository.core.constant;
  * @date 2020-08-07 10:28
  */
 public final class UserStatus {
-    /**
-     * 已启用
-     */
-    public static final int ACTIVE = 1;
 
-    /**
-     * 已禁用
-     */
-    public static final int CLOSED = 0;
+	/**
+	 * 已启用
+	 */
+	public static final int ACTIVE = 1;
+
+	/**
+	 * 已禁用
+	 */
+	public static final int CLOSED = 0;
+
 }

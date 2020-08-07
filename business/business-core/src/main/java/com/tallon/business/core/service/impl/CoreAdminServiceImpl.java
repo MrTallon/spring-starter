@@ -10,43 +10,45 @@ import com.tallon.repository.core.mapper.CoreAdminMapper;
 import org.springframework.stereotype.Service;
 
 /**
-* <p>
-    * 管理员表 服务实现类
-    * </p>
-*
-* @author Tallon
-* @since 2020-08-07
-*/
+ * <p>
+ * 管理员表 服务实现类
+ * </p>
+ *
+ * @author Tallon
+ * @since 2020-08-07
+ */
 @Service
-    public class CoreAdminServiceImpl extends ServiceImpl<CoreAdminMapper, CoreAdmin> implements ICoreAdminService {
-    @Override
-    public boolean create(CoreAdmin coreAdmin) {
-    return super.save(coreAdmin);
-    }
+public class CoreAdminServiceImpl extends ServiceImpl<CoreAdminMapper, CoreAdmin> implements ICoreAdminService {
 
-    @Override
-    public boolean remove(Long id) {
-    return super.removeById(id);
-    }
+	@Override
+	public boolean create(CoreAdmin coreAdmin) {
+		return super.save(coreAdmin);
+	}
 
-    @Override
-    public boolean update(CoreAdmin coreAdmin) {
-    return super.updateById(coreAdmin);
-    }
+	@Override
+	public boolean remove(Long id) {
+		return super.removeById(id);
+	}
 
-    @Override
-    public CoreAdmin get(Long id) {
-    return super.getById(id);
-    }
+	@Override
+	public boolean update(CoreAdmin coreAdmin) {
+		return super.updateById(coreAdmin);
+	}
 
-    @Override
-    public IPage<CoreAdmin> page(int current, int size, CoreAdmin coreAdmin) {
-    Page<CoreAdmin> page = new Page<>(current, size);
-    LambdaQueryWrapper<CoreAdmin> wrapper = new LambdaQueryWrapper<>();
+	@Override
+	public CoreAdmin get(Long id) {
+		return super.getById(id);
+	}
 
-    // TODO 查询
-    // TODO 排序
+	@Override
+	public IPage<CoreAdmin> page(int current, int size, CoreAdmin coreAdmin) {
+		Page<CoreAdmin> page = new Page<>(current, size);
+		LambdaQueryWrapper<CoreAdmin> wrapper = new LambdaQueryWrapper<>();
 
-    return super.page(page, wrapper);
-    }
-    }
+		// TODO 查询
+		// TODO 排序
+
+		return super.page(page, wrapper);
+	}
+
+}

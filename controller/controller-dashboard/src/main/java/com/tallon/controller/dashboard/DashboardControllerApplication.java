@@ -14,8 +14,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages = "com.tallon")
 @MapperScan(basePackages = "com.tallon.repository.core.mapper")
 public class DashboardControllerApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(DashboardControllerApplication.class, args);
-    }
+
+	public static void main(String[] args) {
+		SpringApplication.run(DashboardControllerApplication.class, args);
+	}
 
 }

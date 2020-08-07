@@ -19,34 +19,36 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CoreUserServiceImpl extends ServiceImpl<CoreUserMapper, CoreUser> implements ICoreUserService {
-    @Override
-    public boolean create(CoreUser coreUser) {
-        return super.save(coreUser);
-    }
 
-    @Override
-    public boolean remove(Long id) {
-        return super.removeById(id);
-    }
+	@Override
+	public boolean create(CoreUser coreUser) {
+		return super.save(coreUser);
+	}
 
-    @Override
-    public boolean update(CoreUser coreUser) {
-        return super.updateById(coreUser);
-    }
+	@Override
+	public boolean remove(Long id) {
+		return super.removeById(id);
+	}
 
-    @Override
-    public CoreUser get(Long id) {
-        return super.getById(id);
-    }
+	@Override
+	public boolean update(CoreUser coreUser) {
+		return super.updateById(coreUser);
+	}
 
-    @Override
-    public IPage<CoreUser> page(int current, int size, CoreUser coreUser) {
-        Page<CoreUser> page = new Page<>(current, size);
-        LambdaQueryWrapper<CoreUser> wrapper = new LambdaQueryWrapper<>();
+	@Override
+	public CoreUser get(Long id) {
+		return super.getById(id);
+	}
 
-        // TODO 查询
-        // TODO 排序
+	@Override
+	public IPage<CoreUser> page(int current, int size, CoreUser coreUser) {
+		Page<CoreUser> page = new Page<>(current, size);
+		LambdaQueryWrapper<CoreUser> wrapper = new LambdaQueryWrapper<>();
 
-        return super.page(page, wrapper);
-    }
+		// TODO 查询
+		// TODO 排序
+
+		return super.page(page, wrapper);
+	}
+
 }
