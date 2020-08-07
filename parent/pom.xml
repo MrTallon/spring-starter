@@ -17,11 +17,11 @@
     <inceptionYear>2020-Now</inceptionYear>
     <description>通用依赖-Parent</description>
 
-<!-- <scm>-->
-<!-- <connection>scm:git:https://github.com/MrTallon/spring-starter/parent.git</connection>-->
-<!-- <developerConnection>scm:git:https://github.com/MrTallon/spring-starter/parent.git</developerConnection>-->
-<!-- <url>https://github.com/MrTallon/spring-starter/parent</url>-->
-<!-- </scm>-->
+    <!-- <scm>-->
+    <!-- <connection>scm:git:https://github.com/MrTallon/spring-starter/parent.git</connection>-->
+    <!-- <developerConnection>scm:git:https://github.com/MrTallon/spring-starter/parent.git</developerConnection>-->
+    <!-- <url>https://github.com/MrTallon/spring-starter/parent</url>-->
+    <!-- </scm>-->
 
     <properties>
         <java.version>1.8</java.version>
@@ -74,21 +74,21 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-<!--     清理-->
+                <!-- 清理-->
                 <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
-<!--     安装打包-->
+                <!-- 安装打包-->
                 <maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
-<!--     release-->
+                <!-- release-->
                 <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-<!--     javadoc-->
+                <!-- javadoc-->
                 <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
-<!--     构建单元测试-->
+                <!-- 构建单元测试-->
                 <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
-<!--     依赖冲突检查-->
+                <!-- 依赖冲突检查-->
                 <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
-<!--     jgit-->
+                <!-- jgit-->
                 <maven-scm-provider-jgit-plugin.version>1.9.5</maven-scm-provider-jgit-plugin.version>
-<!--     spring风格美化-->
+                <!-- spring风格美化-->
                 <spring-javaformat-maven-plugin.version>0.0.22</spring-javaformat-maven-plugin.version>
             </properties>
             <build>
@@ -99,14 +99,14 @@
                         <version>${spring-javaformat-maven-plugin.version}</version>
                     </plugin>
 
-                    <!--          mvn clean -->
+                    <!-- mvn clean -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-clean-plugin</artifactId>
                         <version>${maven-clean-plugin.version}</version>
                         <configuration>
                             <filesets>
-                                <!--                      清理 JRebel 产生的备份文件 -->
+                                <!-- 清理 JRebel 产生的备份文件 -->
                                 <fileset>
                                     <directory>${basedir}/**</directory>
                                     <includes>
@@ -117,44 +117,44 @@
                         </configuration>
                     </plugin>
 
-                    <!--          mvn install -->
+                    <!-- mvn install -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-install-plugin</artifactId>
                         <version>${maven-install-plugin.version}</version>
                     </plugin>
 
-                    <!--          JavaDoc 生成插件 -->
+                    <!-- JavaDoc 生成插件 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>${maven-javadoc-plugin.version}</version>
                         <configuration>
-                            <!--                  生成 HTML 后 title 的名字 -->
+                            <!--  生成 HTML 后 title 的名字 -->
                             <windowtitle>千锋达摩院 ${project.version} JavaDocs</windowtitle>
-                            <!--                 解决控制台乱码问题-->
-                            <!--                 需要在【环境变量】中添加【系统变量】-->
-                            <!--                 - 变量名：JAVA_TOOL_OPTIONS-->
-                            <!--                 - 变量值：-Dfile.encoding=UTF-8-->
+                            <!-- 解决控制台乱码问题-->
+                            <!-- 需要在【环境变量】中添加【系统变量】-->
+                            <!-- - 变量名：JAVA_TOOL_OPTIONS-->
+                            <!-- - 变量值：-Dfile.encoding=UTF-8-->
                             <charset>UTF8</charset>
                             <encoding>UTF8</encoding>
                             <docencoding>UTF8</docencoding>
                             <!--&lt;!&ndash;                            &ndash;&gt;-->
-                            <!--                 生成 JavaDoc 所在目录：reportOutputDirectory/destDir-->
-                            <!--                 - reportOutputDirectory：输出的目录位置-->
-                            <!--                 - destDir：文档生成的目录位置-->
+                            <!-- 生成 JavaDoc 所在目录：reportOutputDirectory/destDir-->
+                            <!-- - reportOutputDirectory：输出的目录位置-->
+                            <!-- - destDir：文档生成的目录位置-->
                             <destDir>javadocs</destDir>
                             <reportOutputDirectory>${basedir}/docs</reportOutputDirectory>
                         </configuration>
                     </plugin>
 
-                    <!--          测试用例插件 -->
+                    <!-- 测试用例插件 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>${maven-surefire-plugin.version}</version>
                         <configuration>
-                            <!--                  设置默认跳过测试 -->
+                            <!--  设置默认跳过测试 -->
                             <skip>true</skip>
                             <includes>
                                 <include>**/*Tests.java</include>
@@ -169,8 +169,8 @@
                         </configuration>
                     </plugin>
 
-                    <!--         依赖冲突检查-->
-                    <!--         在进行 mvn clean package 的时候，会在 console 中打印出冲突的 jar 版本和其父 pom-->
+                    <!-- 依赖冲突检查-->
+                    <!-- 在进行 mvn clean package 的时候，会在 console 中打印出冲突的 jar 版本和其父 pom-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-enforcer-plugin</artifactId>
@@ -196,31 +196,31 @@
                         </executions>
                     </plugin>
 
-                    <!--          mvn scm -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-release-plugin</artifactId>
-                        <version>${maven-release-plugin.version}</version>
-                        <configuration>
-                            <providerImplementations>
-                                <git>jgit</git>
-                            </providerImplementations>
-                            <username>root</username>
-                            <password>12345678</password>
-                            <tagBase>${project.artifactId}-${project.version}</tagBase>
-                            <goals>-f pom.xml deploy</goals>
-                            <releaseLabel>${tallon.version}</releaseLabel>
-                            <releaseVersion>${tallon.version}</releaseVersion>
-                            <developmentVersion>${tallon.development.version}</developmentVersion>
-                        </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.apache.maven.scm</groupId>
-                                <artifactId>maven-scm-provider-jgit</artifactId>
-                                <version>${maven-scm-provider-jgit-plugin.version}</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
+                    <!-- mvn scm -->
+                    <!-- <plugin>-->
+                    <!-- <groupId>org.apache.maven.plugins</groupId>-->
+                    <!-- <artifactId>maven-release-plugin</artifactId>-->
+                    <!-- <version>${maven-release-plugin.version}</version>-->
+                    <!-- <configuration>-->
+                    <!-- <providerImplementations>-->
+                    <!-- <git>jgit</git>-->
+                    <!-- </providerImplementations>-->
+                    <!-- <username>root</username>-->
+                    <!-- <password>12345678</password>-->
+                    <!-- <tagBase>${project.artifactId}-${project.version}</tagBase>-->
+                    <!-- <goals>-f pom.xml deploy</goals>-->
+                    <!-- <releaseLabel>${tallon.version}</releaseLabel>-->
+                    <!-- <releaseVersion>${tallon.version}</releaseVersion>-->
+                    <!-- <developmentVersion>${tallon.development.version}</developmentVersion>-->
+                    <!-- </configuration>-->
+                    <!-- <dependencies>-->
+                    <!-- <dependency>-->
+                    <!-- <groupId>org.apache.maven.scm</groupId>-->
+                    <!-- <artifactId>maven-scm-provider-jgit</artifactId>-->
+                    <!-- <version>${maven-scm-provider-jgit-plugin.version}</version>-->
+                    <!-- </dependency>-->
+                    <!-- </dependencies>-->
+                    <!-- </plugin>-->
                 </plugins>
             </build>
         </profile>

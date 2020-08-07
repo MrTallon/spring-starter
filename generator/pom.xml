@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -15,11 +16,11 @@
     <inceptionYear>2020-Now</inceptionYear>
     <description>代码生成器</description>
 
-<!-- <scm>-->
-<!-- <connection>scm:git:https://github.com/MrTallon/spring-starter/generator.git</connection>-->
-<!-- <developerConnection>scm:git:https://github.com/MrTallon/spring-starter/generator.git</developerConnection>-->
-<!-- <url>https://github.com/MrTallon/spring-starter/generator</url>-->
-<!-- </scm>-->
+    <!-- <scm>-->
+    <!-- <connection>scm:git:https://github.com/MrTallon/spring-starter/generator.git</connection>-->
+    <!-- <developerConnection>scm:git:https://github.com/MrTallon/spring-starter/generator.git</developerConnection>-->
+    <!-- <url>https://github.com/MrTallon/spring-starter/generator</url>-->
+    <!-- </scm>-->
 
     <developers>
         <developer>
@@ -30,7 +31,7 @@
     </developers>
 
     <dependencies>
-<!-- Datasource -->
+        <!-- Datasource -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -50,7 +51,7 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-<!-- MyBatisPlus -->
+        <!-- MyBatisPlus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
@@ -64,7 +65,7 @@
             <artifactId>freemarker</artifactId>
         </dependency>
 
-<!-- Commons -->
+        <!-- Commons -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

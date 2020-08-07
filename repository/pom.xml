@@ -30,8 +30,10 @@
         </developer>
     </developers>
 
+    <!-- 服务模块 -->
     <modules>
-        <!-- 服务模块 -->
+        <module>repository-core</module>
+
     </modules>
 
     <dependencies>
