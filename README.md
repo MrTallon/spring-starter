@@ -9,10 +9,10 @@
 部署单体应用程序意味着运行一个或多个相同副本的单个较大的应用程序。通常会在每台服务器上配置 N 个服务器（物理或虚拟）并运行 M 个应用程序实例。
 
 微服务应用程序由数十甚至上百个服务组成。服务以不同的语言和框架编写。每个都是一个迷你的应用程序，具有自己特定的部署、资源、扩展和监视要求。
-![每个容器一个服务实例](http://images.tallon.com/FlSOjFKpUZMc5rRoXTm-bABVCa-q@.jpg)
+![每个容器一个服务实例](https://mrtallon.gitee.io/img/bushu.jpg)
 
 ## 应用分层
-![分层](http://images.tallon.com/FqZzmKvXn2DB2_he7FbSW_oq-NkD@.jpg)
+![分层](https://mrtallon.gitee.io/img/ceng.jpg)
 - 开放接口层： 可直接封装 Service 方法暴露成 RPC 接口；通过 Web 封装成 HTTP 接口； 进行网关安全控制、 流量控制等。
 - 终端显示层： 各个端的模板渲染并执行显示的层。 当前主要是模板引擎渲染， JS 渲染，移动端展示等。
 - 请求处理层： 主要是对访问控制进行转发，各类基本参数校验，或者不复用的业务简单处理等。
