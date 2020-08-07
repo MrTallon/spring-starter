@@ -9,7 +9,7 @@
 部署单体应用程序意味着运行一个或多个相同副本的单个较大的应用程序。通常会在每台服务器上配置 N 个服务器（物理或虚拟）并运行 M 个应用程序实例。
 
 微服务应用程序由数十甚至上百个服务组成。服务以不同的语言和框架编写。每个都是一个迷你的应用程序，具有自己特定的部署、资源、扩展和监视要求。
-![每个容器一个服务实例](https://mrtallon.gitee.io/img/bushu.jpg)
+![部署](https://mrtallon.gitee.io/img/bushu.jpg)
 
 ## 应用分层
 ![分层](https://mrtallon.gitee.io/img/ceng.jpg)
