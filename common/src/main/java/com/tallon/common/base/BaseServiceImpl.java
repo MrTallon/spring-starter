@@ -20,11 +20,6 @@ public abstract class BaseServiceImpl<M extends BaseMapper<T>, T extends BaseDom
 		implements IBaseService<T> {
 
 	/**
-	 * 通过反射调用 getId()
-	 */
-	private static final String INVOKE_ID = "getId";
-
-	/**
 	 * 检查字段：ID
 	 */
 	protected static final String ID = "id";
@@ -45,7 +40,7 @@ public abstract class BaseServiceImpl<M extends BaseMapper<T>, T extends BaseDom
 	@Override
 	public boolean update(T domain) {
 		try {
-			if (checkId((Long) domain.getClass().getMethod(INVOKE_ID).invoke(domain))) {
+			if (checkId(domain.getId())) {
 				return super.updateById(domain);
 			}
 			return false;

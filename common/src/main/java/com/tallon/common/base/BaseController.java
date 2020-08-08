@@ -82,7 +82,7 @@ public abstract class BaseController<T extends BaseDomain, S extends IBaseServic
 	}
 
 	/**
-	 * 获取
+	 * 根据id获取
 	 * @param id {@code Long}
 	 * @return {@link ResponseResult}
 	 */

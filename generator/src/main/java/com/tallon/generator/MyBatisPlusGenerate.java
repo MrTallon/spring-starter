@@ -99,6 +99,11 @@ public class MyBatisPlusGenerate {
     private static final String TABLES = "core_user,core_admin";
 
     /**
+     * 通用包路径
+     */
+    private static final String PACKAGE_BASE = "com.tallon.commons.base";
+
+    /**
      * 全局配置
      *
      * @return {@link GlobalConfig}
@@ -188,6 +193,14 @@ public class MyBatisPlusGenerate {
         tableFills.add(new TableFill("create_time", FieldFill.INSERT));
         tableFills.add(new TableFill("update_time", FieldFill.INSERT_UPDATE));
         config.setTableFillList(tableFills);
+
+        // CommonBase
+        config.setSuperEntityColumns("id", "create_time", "update_time");
+        config.setSuperEntityClass(PACKAGE_BASE.concat(".BaseDomain"));
+        config.setSuperServiceClass(PACKAGE_BASE.concat(".IBaseService"));
+        config.setSuperServiceImplClass(PACKAGE_BASE.concat(".BaseServiceImpl"));
+        config.setSuperControllerClass(PACKAGE_BASE.concat(".BaseController"));
+
         return config;
     }
 
