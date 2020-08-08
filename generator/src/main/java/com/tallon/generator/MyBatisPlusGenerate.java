@@ -96,12 +96,12 @@ public class MyBatisPlusGenerate {
     /**
      * 要生成的表，用 `,` 分割
      */
-    private static final String TABLES = "core_user,core_admin";
+    private static final String TABLES = "core_post";
 
     /**
      * 通用包路径
      */
-    private static final String PACKAGE_BASE = "com.tallon.commons.base";
+    private static final String PACKAGE_BASE = "com.tallon.common.base";
 
     /**
      * 全局配置
