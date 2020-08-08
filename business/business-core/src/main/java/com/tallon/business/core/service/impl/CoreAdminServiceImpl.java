@@ -1,13 +1,14 @@
 package com.tallon.business.core.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tallon.business.core.service.ICoreAdminService;
+import com.tallon.common.base.BaseServiceImpl;
 import com.tallon.common.excepetion.BusinessException;
 import com.tallon.common.response.ResponseCode;
+import com.tallon.repository.core.constant.UserStatus;
 import com.tallon.repository.core.domain.CoreAdmin;
 import com.tallon.repository.core.mapper.CoreAdminMapper;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,7 @@ import org.springframework.stereotype.Service;
  * @since 2020-08-07
  */
 @Service
-public class CoreAdminServiceImpl extends ServiceImpl<CoreAdminMapper, CoreAdmin> implements ICoreAdminService {
-
-    /**
-     * 检查字段：ID
-     */
-    private static final String ID = "id";
+public class CoreAdminServiceImpl extends BaseServiceImpl<CoreAdminMapper, CoreAdmin> implements ICoreAdminService {
 
     /**
      * 检查字段：用户名
@@ -48,35 +44,11 @@ public class CoreAdminServiceImpl extends ServiceImpl<CoreAdminMapper, CoreAdmin
         if (!checkUsername(coreAdmin.getUsername())
                 && !checkNickname(coreAdmin.getNickname())
                 && !checkEmail(coreAdmin.getEmail())) {
+            coreAdmin.setStatus(UserStatus.CLOSED);
             return super.save(coreAdmin);
         }
 
         return false;
-    }
-
-    @Override
-    public boolean remove(Long id) {
-        if (checkId(id)) {
-            return super.removeById(id);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean update(CoreAdmin coreAdmin) {
-        if (checkId(coreAdmin.getId())) {
-            return super.updateById(coreAdmin);
-        }
-        return false;
-    }
-
-    @Override
-    public CoreAdmin get(Long id) {
-        CoreAdmin coreAdmin = super.getById(id);
-        if (null == coreAdmin) {
-            throw new BusinessException(ResponseCode.USER_NOT_EXIST);
-        }
-        return coreAdmin;
     }
 
     @Override
@@ -86,10 +58,10 @@ public class CoreAdminServiceImpl extends ServiceImpl<CoreAdminMapper, CoreAdmin
         // 查询条件
         if (null != coreAdmin) {
             LambdaQueryWrapper<CoreAdmin> wrapper = new LambdaQueryWrapper<>();
-            wrapper.eq(CoreAdmin::getId, coreAdmin)
-                    .or().like(CoreAdmin::getUsername, coreAdmin)
-                    .or().like(CoreAdmin::getNickname, coreAdmin)
-                    .or().like(CoreAdmin::getEmail, coreAdmin);
+            wrapper.eq(StringUtils.isNotBlank(String.valueOf(coreAdmin.getId())),CoreAdmin::getId, coreAdmin)
+                    .or().like(StringUtils.isNotBlank(String.valueOf(coreAdmin.getUsername())),CoreAdmin::getUsername, coreAdmin)
+                    .or().like(StringUtils.isNotBlank(String.valueOf(coreAdmin.getNickname())),CoreAdmin::getNickname, coreAdmin)
+                    .or().like(StringUtils.isNotBlank(String.valueOf(coreAdmin.getEmail())),CoreAdmin::getEmail, coreAdmin);
             return super.page(page, wrapper);
         }
 
@@ -134,24 +106,5 @@ public class CoreAdminServiceImpl extends ServiceImpl<CoreAdminMapper, CoreAdmin
             throw new BusinessException(ResponseCode.USER_EMAIL_HAS_EXISTED);
         }
         return false;
-    }
-
-    /**
-     * 检查 ID 是否存在
-     *
-     * @param id {@code Long} ID
-     * @return {@code boolean} ID 不存在则抛出异常
-     */
-    private boolean checkId(Long id) {
-        if (!checkUniqueness(ID, id)) {
-            throw new BusinessException(ResponseCode.USER_NOT_EXIST);
-        }
-        return true;
-    }
-
-    private boolean checkUniqueness(String column, Object value) {
-        QueryWrapper<CoreAdmin> wrapper = new QueryWrapper<>();
-        wrapper.eq(column, value);
-        return super.count(wrapper) > 0;
     }
 }

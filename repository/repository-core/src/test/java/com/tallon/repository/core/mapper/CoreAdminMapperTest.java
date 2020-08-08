@@ -16,19 +16,19 @@ import java.util.List;
 @SpringBootTest(classes = CoreRepositoryApplication.class)
 public class CoreAdminMapperTest {
 
-    @Resource
-    private CoreAdminMapper mapper;
+	@Resource
+	private CoreAdminMapper mapper;
 
-    @Test
-    public void test() {
-        System.out.println("Hello World");
-    }
+	@Test
+	public void test() {
+		System.out.println("Hello World");
+	}
 
-    @Test
-    public void get1() {
-        List<CoreAdmin> coreAdmins = mapper.selectList(null);
-        coreAdmins.forEach(System.out::print);
-        Assert.assertNotNull(coreAdmins);
-    }
+	@Test
+	public void get1() {
+		List<CoreAdmin> coreAdmins = mapper.selectList(null);
+		coreAdmins.forEach(System.out::print);
+		Assert.assertNotNull(coreAdmins);
+	}
 
 }
