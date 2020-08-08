@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.tallon.business.core.service.ICoreAdminService;
 import com.tallon.common.response.ResponseResult;
 import com.tallon.repository.core.domain.CoreAdmin;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,9 @@ public class CoreAdminController {
 	@Resource
 	private ICoreAdminService coreAdminService;
 
+	@Resource
+	private BCryptPasswordEncoder passwordEncoder;
+
 	/**
 	 * 新增
 	 * @param coreAdmin {@link CoreAdmin}
@@ -46,7 +50,7 @@ public class CoreAdminController {
 		if (bindingResult.hasErrors()) {
 			return ResponseResult.failure(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
 		}
-
+		coreAdmin.setPassword(passwordEncoder.encode(coreAdmin.getPassword()));
 		// 业务逻辑
 		boolean created = coreAdminService.create(coreAdmin);
 		if (created) {
@@ -83,7 +87,7 @@ public class CoreAdminController {
 		if (bindingResult.hasErrors()) {
 			return ResponseResult.failure(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
 		}
-
+		coreAdmin.setPassword(passwordEncoder.encode(coreAdmin.getPassword()));
 		// 业务逻辑
 		boolean updated = coreAdminService.update(coreAdmin);
 		if (updated) {
