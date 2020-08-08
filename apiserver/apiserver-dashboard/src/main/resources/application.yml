@@ -1,0 +1,19 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: apiserver-dashboard
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  cloud:
+    gateway:
+      routes:
+        - predicates:
+            - Path=/api/dashboard/{business}/{module}/**
+          filters:
+            - StripPrefix=2
+          uri: "http://localhost:8080"
