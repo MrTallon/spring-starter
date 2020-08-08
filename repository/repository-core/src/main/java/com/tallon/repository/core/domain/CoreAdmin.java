@@ -70,5 +70,4 @@ public class CoreAdmin extends BaseDomain {
 	@TableField(fill = FieldFill.INSERT)
 	private Integer isDeleted;
 
-
 }

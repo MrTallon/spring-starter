@@ -17,13 +17,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @MapperScan(basePackages = "com.tallon.repository.core.mapper")
 public class DashboardControllerApplication {
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    public static void main(String[] args) {
-        SpringApplication.run(DashboardControllerApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(DashboardControllerApplication.class, args);
+	}
 
 }
