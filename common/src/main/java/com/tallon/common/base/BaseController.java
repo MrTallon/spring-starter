@@ -100,7 +100,7 @@ public abstract class BaseController<T extends BaseDomain, S extends IBaseServic
 	 */
 	@GetMapping("page")
 	public ResponseResult page(@RequestParam int current, @RequestParam int size, @ModelAttribute T domain) {
-		IPage<T> page = service.page(current, size, domain);
+		IPage<?> page = service.page(current, size, domain);
 		return ResponseResult.success(page);
 	}
 

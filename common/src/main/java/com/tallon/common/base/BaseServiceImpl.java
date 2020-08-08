@@ -60,7 +60,7 @@ public abstract class BaseServiceImpl<M extends BaseMapper<T>, T extends BaseDom
 	}
 
 	@Override
-	public IPage<T> page(int current, int size, T domain) {
+	public IPage<?> page(int current, int size, T domain) {
 		Page<T> page = new Page<>(current, size);
 		LambdaQueryWrapper<T> wrapper = new LambdaQueryWrapper<>();
 		return super.page(page, wrapper);

@@ -47,6 +47,6 @@ public interface IBaseService<T extends BaseDomain> extends IService<T> {
 	 * @param domain 领域模型
 	 * @return 管理员分页数据
 	 */
-	IPage<T> page(int current, int size, T domain);
+	IPage<?> page(int current, int size, T domain);
 
 }
