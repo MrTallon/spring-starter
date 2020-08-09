@@ -33,78 +33,76 @@ import javax.sql.DataSource;
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-    /**
-     * 注入用于支持 password 模式
-     */
-    @Resource
-    private AuthenticationManager authenticationManager;
+	/**
+	 * 注入用于支持 password 模式
+	 */
+	@Resource
+	private AuthenticationManager authenticationManager;
 
-    /**
-     * 默认的加密方式
-     *
-     * @return {@link BCryptPasswordEncoder}
-     */
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	/**
+	 * 默认的加密方式
+	 * @return {@link BCryptPasswordEncoder}
+	 */
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    /**
-     * Refresh Token 时需要自定义实现，否则抛异常 <br>
-     * Lazy 注解是为了防止循环注入（is there an unresolvable circular reference?）
-     */
-    @Lazy
-    @Resource(name = "userDetailsServiceBean")
-    private UserDetailsService userDetailsService;
+	/**
+	 * Refresh Token 时需要自定义实现，否则抛异常 <br>
+	 * Lazy 注解是为了防止循环注入（is there an unresolvable circular reference?）
+	 */
+	@Lazy
+	@Resource(name = "userDetailsServiceBean")
+	private UserDetailsService userDetailsService;
 
-    @Bean
-    @Primary
-    @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource dataSource() {
-        // 配置数据源（注意，我使用的是 HikariCP 连接池），以上注解是指定数据源，否则会有冲突
-        return DataSourceBuilder.create().build();
-    }
+	@Bean
+	@Primary
+	@ConfigurationProperties(prefix = "spring.datasource")
+	public DataSource dataSource() {
+		// 配置数据源（注意，我使用的是 HikariCP 连接池），以上注解是指定数据源，否则会有冲突
+		return DataSourceBuilder.create().build();
+	}
 
-    @Bean
-    public TokenStore tokenStore() {
-        // 基于 JDBC 实现，令牌保存到数据库
-        return new JdbcTokenStore(dataSource());
-    }
+	@Bean
+	public TokenStore tokenStore() {
+		// 基于 JDBC 实现，令牌保存到数据库
+		return new JdbcTokenStore(dataSource());
+	}
 
-    @Bean
-    public ClientDetailsService jdbcClientDetailsService() {
-        // 基于 JDBC 实现，需要事先在数据库配置客户端信息
-        return new JdbcClientDetailsService(dataSource());
-    }
+	@Bean
+	public ClientDetailsService jdbcClientDetailsService() {
+		// 基于 JDBC 实现，需要事先在数据库配置客户端信息
+		return new JdbcClientDetailsService(dataSource());
+	}
 
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints
-                // 用于支持密码模式
-                .authenticationManager(authenticationManager).tokenStore(tokenStore());
+	@Override
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+		endpoints
+				// 用于支持密码模式
+				.authenticationManager(authenticationManager).tokenStore(tokenStore());
 
-        // Refresh Token 时需要自定义实现，否则抛异常
-        // Handling error: IllegalStateException, UserDetailsService is required.
-        endpoints.userDetailsService(userDetailsService);
-    }
+		// Refresh Token 时需要自定义实现，否则抛异常
+		// Handling error: IllegalStateException, UserDetailsService is required.
+		endpoints.userDetailsService(userDetailsService);
+	}
 
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security
-                // 允许客户端访问 /oauth/check_token 检查 token
-                .checkTokenAccess("isAuthenticated()").allowFormAuthenticationForClients();
-    }
+	@Override
+	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+		security
+				// 允许客户端访问 /oauth/check_token 检查 token
+				.checkTokenAccess("isAuthenticated()").allowFormAuthenticationForClients();
+	}
 
-    /**
-     * 配置客户端
-     *
-     * @param clients {@link ClientDetailsServiceConfigurer}
-     * @throws Exception 全局异常
-     */
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        // 客户端配置
-        clients.withClientDetails(jdbcClientDetailsService());
-    }
+	/**
+	 * 配置客户端
+	 * @param clients {@link ClientDetailsServiceConfigurer}
+	 * @throws Exception 全局异常
+	 */
+	@Override
+	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		// 客户端配置
+		clients.withClientDetails(jdbcClientDetailsService());
+	}
 
 }

@@ -17,11 +17,14 @@ import org.apache.ibatis.annotations.Param;
  * @since 2020-08-08
  */
 public interface CorePostMapper extends BaseMapper<CorePost> {
-    /**
-     * 查询文章
-     * @param page {@link IPage}
-     * @param queryWrapper {@link Wrapper}
-     * @return {@link IPage}
-     */
-    IPage<CorePostDTO> listByQuery(IPage<CorePostDTO> page, @Param(Constants.WRAPPER) Wrapper<CorePostDTO> queryWrapper);
+
+	/**
+	 * 查询文章
+	 * @param page {@link IPage}
+	 * @param queryWrapper {@link Wrapper}
+	 * @return {@link IPage}
+	 */
+	IPage<CorePostDTO> listByQuery(IPage<CorePostDTO> page,
+			@Param(Constants.WRAPPER) Wrapper<CorePostDTO> queryWrapper);
+
 }

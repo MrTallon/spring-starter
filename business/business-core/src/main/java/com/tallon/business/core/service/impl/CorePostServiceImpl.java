@@ -22,21 +22,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class CorePostServiceImpl extends BaseServiceImpl<CorePostMapper, CorePost> implements ICorePostService {
 
-    @Override
-    public IPage<CorePostDTO> page(int current, int size, CorePost corePost) {
-        Page<CorePostDTO> page = new Page<>(current, size);
+	@Override
+	public IPage<CorePostDTO> page(int current, int size, CorePost corePost) {
+		Page<CorePostDTO> page = new Page<>(current, size);
 
-        LambdaQueryWrapper<CorePostDTO> wrapper = new LambdaQueryWrapper<>();
-        wrapper
-                .like(StringUtils.isNotBlank(corePost.getPostTitle()),
-                        CorePostDTO::getPostTitle, corePost.getPostTitle())
-                .and(StringUtils.isNotBlank(corePost.getPostStatus()),
-                        i -> i.eq(CorePostDTO::getPostStatus, corePost.getPostStatus()))
-                .and(StringUtils.isNotBlank(corePost.getPostType()),
-                        i -> i.eq(CorePostDTO::getPostType, corePost.getPostType()));
-        wrapper
-                .orderByDesc(CorePost::getCreateTime);
+		LambdaQueryWrapper<CorePostDTO> wrapper = new LambdaQueryWrapper<>();
+		wrapper.like(StringUtils.isNotBlank(corePost.getPostTitle()), CorePostDTO::getPostTitle,
+				corePost.getPostTitle())
+				.and(StringUtils.isNotBlank(corePost.getPostStatus()),
+						i -> i.eq(CorePostDTO::getPostStatus, corePost.getPostStatus()))
+				.and(StringUtils.isNotBlank(corePost.getPostType()),
+						i -> i.eq(CorePostDTO::getPostType, corePost.getPostType()));
+		wrapper.orderByDesc(CorePost::getCreateTime);
 
-        return baseMapper.listByQuery(page, wrapper);
-    }
+		return baseMapper.listByQuery(page, wrapper);
+	}
+
 }

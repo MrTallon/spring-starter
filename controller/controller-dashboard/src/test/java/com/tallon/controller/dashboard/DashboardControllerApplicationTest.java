@@ -12,12 +12,13 @@ import javax.annotation.Resource;
 @SpringBootTest(classes = DashboardControllerApplication.class)
 public class DashboardControllerApplicationTest {
 
-    @Resource
-    private BCryptPasswordEncoder encoder;
+	@Resource
+	private BCryptPasswordEncoder encoder;
 
-    @Test
-    public void password() {
-        System.out.println(encoder.encode("dashboard"));
-//        $2a$10$73yLtnu8SQxT3FKprgXWUOoPmjkB38EykBeoCBcWirkZDe6aEvV7q
-    }
+	@Test
+	public void password() {
+		System.out.println(encoder.encode("dashboard"));
+		// $2a$10$73yLtnu8SQxT3FKprgXWUOoPmjkB38EykBeoCBcWirkZDe6aEvV7q
+	}
+
 }

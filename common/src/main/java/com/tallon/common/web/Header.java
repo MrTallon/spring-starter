@@ -13,17 +13,18 @@ import com.tallon.common.response.ResponseCode;
  */
 public class Header {
 
-    private static final String AUTHORIZATION_BEARER_TOKEN = "Basic ";
+	private static final String AUTHORIZATION_BEARER_TOKEN = "Basic ";
 
-    /**
-     * 获取 Token
-     * @param header {@code String} request.getHeader("Authorization")
-     * @return {@code String} token
-     */
-    public static String getAuthorization(String header) {
-        if (StrUtil.isBlank(header) || header.startsWith(AUTHORIZATION_BEARER_TOKEN)) {
-            throw new BusinessException(ResponseCode.USER_NOT_LOGGED_IN);
-        }
-        return header.substring(AUTHORIZATION_BEARER_TOKEN.length() + 1);
-    }
+	/**
+	 * 获取 Token
+	 * @param header {@code String} request.getHeader("Authorization")
+	 * @return {@code String} token
+	 */
+	public static String getAuthorization(String header) {
+		if (StrUtil.isBlank(header) || header.startsWith(AUTHORIZATION_BEARER_TOKEN)) {
+			throw new BusinessException(ResponseCode.USER_NOT_LOGGED_IN);
+		}
+		return header.substring(AUTHORIZATION_BEARER_TOKEN.length() + 1);
+	}
+
 }

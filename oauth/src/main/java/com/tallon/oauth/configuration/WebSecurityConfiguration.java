@@ -21,30 +21,27 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    @Override
-    public UserDetailsService userDetailsServiceBean() {
-        return new UserDetailsServiceImpl();
-    }
+	@Bean
+	@Override
+	public UserDetailsService userDetailsServiceBean() {
+		return new UserDetailsServiceImpl();
+	}
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsServiceBean());
-    }
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsServiceBean());
+	}
 
-    @Override
-    public void configure(WebSecurity web) {
-        // 忽略的访问路径
-        web.ignoring()
-                .antMatchers("/login/**")
-                .antMatchers("/registry/user")
-                .antMatchers("/logout/**");
-    }
+	@Override
+	public void configure(WebSecurity web) {
+		// 忽略的访问路径
+		web.ignoring().antMatchers("/login/**").antMatchers("/registry/user").antMatchers("/logout/**");
+	}
 
 }

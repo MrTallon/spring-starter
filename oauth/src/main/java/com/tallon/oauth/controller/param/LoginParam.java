@@ -18,16 +18,16 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class LoginParam implements Serializable {
 
-    private static final long serialVersionUID = 6227804428105653962L;
+	private static final long serialVersionUID = 6227804428105653962L;
 
-    /**
-     * 账号
-     */
-    private String username;
+	/**
+	 * 账号
+	 */
+	private String username;
 
-    /**
-     * 密码
-     */
-    private String password;
+	/**
+	 * 密码
+	 */
+	private String password;
 
 }

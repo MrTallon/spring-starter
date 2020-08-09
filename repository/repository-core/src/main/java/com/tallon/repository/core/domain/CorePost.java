@@ -23,6 +23,7 @@ import javax.validation.constraints.NotBlank;
 public class CorePost extends BaseDomain {
 
 	private static final long serialVersionUID = 3289350579429329036L;
+
 	/**
 	 * 对应作者 ID
 	 */

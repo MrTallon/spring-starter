@@ -22,44 +22,44 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping(value = "logout")
 public class LogoutController {
-    @Resource
-    public TokenStore tokenStore;
 
-    @Resource
-    public HttpServletRequest request;
+	@Resource
+	public TokenStore tokenStore;
 
-    /**
-     * 注销管理员
-     *
-     * @return {@link ResponseResult}
-     */
-    @PostMapping("admin")
-    public ResponseResult admin() {
-        return logout();
-    }
+	@Resource
+	public HttpServletRequest request;
 
-    /**
-     * 注销用户
-     *
-     * @return {@link ResponseResult}
-     */
-    @PostMapping("user")
-    public ResponseResult users() {
-        return logout();
-    }
+	/**
+	 * 注销管理员
+	 * @return {@link ResponseResult}
+	 */
+	@PostMapping("admin")
+	public ResponseResult admin() {
+		return logout();
+	}
 
-    // 私有方法 ------------------------------------------- Begin
+	/**
+	 * 注销用户
+	 * @return {@link ResponseResult}
+	 */
+	@PostMapping("user")
+	public ResponseResult users() {
+		return logout();
+	}
 
-    private ResponseResult logout() {
-        String token = Header.getAuthorization(request.getHeader("Authorization"));
+	// 私有方法 ------------------------------------------- Begin
 
-        // 删除 token 以注销
-        OAuth2AccessToken oAuth2AccessToken = tokenStore.readAccessToken(token);
-        if (null != oAuth2AccessToken) {
-            tokenStore.removeAccessToken(oAuth2AccessToken);
-            return ResponseResult.success();
-        }
+	private ResponseResult logout() {
+		String token = Header.getAuthorization(request.getHeader("Authorization"));
 
-        return ResponseResult.failure(ResponseCode.INTERFACE_ADDRESS_INVALID);
-    }
+		// 删除 token 以注销
+		OAuth2AccessToken oAuth2AccessToken = tokenStore.readAccessToken(token);
+		if (null != oAuth2AccessToken) {
+			tokenStore.removeAccessToken(oAuth2AccessToken);
+			return ResponseResult.success();
+		}
+
+		return ResponseResult.failure(ResponseCode.INTERFACE_ADDRESS_INVALID);
+	}
+
 }

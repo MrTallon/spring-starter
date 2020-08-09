@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 public abstract class BaseDomain implements Serializable {
 
 	private static final long serialVersionUID = 8906592736940941841L;
+
 	/**
 	 * 主键
 	 */

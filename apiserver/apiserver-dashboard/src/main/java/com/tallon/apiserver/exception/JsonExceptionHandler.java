@@ -33,84 +33,91 @@ import java.util.Map;
 @Slf4j
 public class JsonExceptionHandler implements ErrorWebExceptionHandler {
 
-    private List<HttpMessageReader<?>> messageReaders = Collections.emptyList();
-    private List<HttpMessageWriter<?>> messageWriters = Collections.emptyList();
-    private List<ViewResolver> viewResolvers = Collections.emptyList();
-    private ThreadLocal<Map<String, Object>> exceptionHandlerResult = new ThreadLocal<>();
+	private List<HttpMessageReader<?>> messageReaders = Collections.emptyList();
 
-    public void setMessageReaders(List<HttpMessageReader<?>> messageReaders) {
-        Assert.notNull(messageReaders, "'messageReaders' must not be null");
-        this.messageReaders = messageReaders;
-    }
+	private List<HttpMessageWriter<?>> messageWriters = Collections.emptyList();
 
-    public void setViewResolvers(List<ViewResolver> viewResolvers) {
-        this.viewResolvers = viewResolvers;
-    }
+	private List<ViewResolver> viewResolvers = Collections.emptyList();
 
-    public void setMessageWriters(List<HttpMessageWriter<?>> messageWriters) {
-        Assert.notNull(messageWriters, "'messageWriters' must not be null");
-        this.messageWriters = messageWriters;
-    }
+	private ThreadLocal<Map<String, Object>> exceptionHandlerResult = new ThreadLocal<>();
 
-    protected Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
-        Map<String, Object> result = exceptionHandlerResult.get();
-        return ServerResponse.status((HttpStatus) result.get("httpStatus"))
-                .body(BodyInserters.fromValue(result.get("body")));
-    }
+	public void setMessageReaders(List<HttpMessageReader<?>> messageReaders) {
+		Assert.notNull(messageReaders, "'messageReaders' must not be null");
+		this.messageReaders = messageReaders;
+	}
 
-    private Mono<? extends Void> write(ServerWebExchange exchange, ServerResponse response) {
-        exchange.getResponse().getHeaders().setContentType(response.headers().getContentType());
-        return response.writeTo(exchange, new ResponseContext());
-    }
+	public void setViewResolvers(List<ViewResolver> viewResolvers) {
+		this.viewResolvers = viewResolvers;
+	}
 
-    private class ResponseContext implements ServerResponse.Context {
-        @Override
-        public List<HttpMessageWriter<?>> messageWriters() {
-            return JsonExceptionHandler.this.messageWriters;
-        }
+	public void setMessageWriters(List<HttpMessageWriter<?>> messageWriters) {
+		Assert.notNull(messageWriters, "'messageWriters' must not be null");
+		this.messageWriters = messageWriters;
+	}
 
-        @Override
-        public List<ViewResolver> viewResolvers() {
-            return JsonExceptionHandler.this.viewResolvers;
-        }
-    }
+	protected Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
+		Map<String, Object> result = exceptionHandlerResult.get();
+		return ServerResponse.status((HttpStatus) result.get("httpStatus"))
+				.body(BodyInserters.fromValue(result.get("body")));
+	}
 
-    @Override
-    public Mono<Void> handle(ServerWebExchange serverWebExchange, Throwable throwable) {
-        // 按照异常类型进行处理
-        HttpStatus httpStatus;
-        String body;
-        if (throwable instanceof NotFoundException) {
-            httpStatus = HttpStatus.NOT_FOUND;
-            body = "Service Not Found";
-        } else if (throwable instanceof ResponseStatusException) {
-            ResponseStatusException responseStatusException = (ResponseStatusException) throwable;
-            httpStatus = responseStatusException.getStatus();
-            body = responseStatusException.getMessage();
-        } else {
-            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-            body = "服务器内部错误";
-        }
+	private Mono<? extends Void> write(ServerWebExchange exchange, ServerResponse response) {
+		exchange.getResponse().getHeaders().setContentType(response.headers().getContentType());
+		return response.writeTo(exchange, new ResponseContext());
+	}
 
-        // 封装响应结果
-        Map<String, Object> result = new HashMap<>(2, 1);
-        result.put("httpStatus", httpStatus);
+	private class ResponseContext implements ServerResponse.Context {
 
-        String msg = "{\"code\":" + httpStatus.value() + ",\"message\": \"" + body + "\"}";
-        result.put("body", msg);
+		@Override
+		public List<HttpMessageWriter<?>> messageWriters() {
+			return JsonExceptionHandler.this.messageWriters;
+		}
 
-        // 错误日志
-        ServerHttpRequest request = serverWebExchange.getRequest();
-        log.error("[全局系统异常]\r\n请求路径：{}\r\n异常记录：{}", request.getPath(), throwable.getMessage());
+		@Override
+		public List<ViewResolver> viewResolvers() {
+			return JsonExceptionHandler.this.viewResolvers;
+		}
 
-        if (serverWebExchange.getResponse().isCommitted()) {
-            return Mono.error(throwable);
-        }
-        exceptionHandlerResult.set(result);
-        ServerRequest newRequest = ServerRequest.create(serverWebExchange, this.messageReaders);
-        return RouterFunctions.route(RequestPredicates.all(), this::renderErrorResponse).route(newRequest)
-                .switchIfEmpty(Mono.error(throwable))
-                .flatMap((handler) -> handler.handle(newRequest))
-                .flatMap((response) -> write(serverWebExchange, response));
-    }
+	}
+
+	@Override
+	public Mono<Void> handle(ServerWebExchange serverWebExchange, Throwable throwable) {
+		// 按照异常类型进行处理
+		HttpStatus httpStatus;
+		String body;
+		if (throwable instanceof NotFoundException) {
+			httpStatus = HttpStatus.NOT_FOUND;
+			body = "Service Not Found";
+		}
+		else if (throwable instanceof ResponseStatusException) {
+			ResponseStatusException responseStatusException = (ResponseStatusException) throwable;
+			httpStatus = responseStatusException.getStatus();
+			body = responseStatusException.getMessage();
+		}
+		else {
+			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			body = "服务器内部错误";
+		}
+
+		// 封装响应结果
+		Map<String, Object> result = new HashMap<>(2, 1);
+		result.put("httpStatus", httpStatus);
+
+		String msg = "{\"code\":" + httpStatus.value() + ",\"message\": \"" + body + "\"}";
+		result.put("body", msg);
+
+		// 错误日志
+		ServerHttpRequest request = serverWebExchange.getRequest();
+		log.error("[全局系统异常]\r\n请求路径：{}\r\n异常记录：{}", request.getPath(), throwable.getMessage());
+
+		if (serverWebExchange.getResponse().isCommitted()) {
+			return Mono.error(throwable);
+		}
+		exceptionHandlerResult.set(result);
+		ServerRequest newRequest = ServerRequest.create(serverWebExchange, this.messageReaders);
+		return RouterFunctions.route(RequestPredicates.all(), this::renderErrorResponse).route(newRequest)
+				.switchIfEmpty(Mono.error(throwable)).flatMap((handler) -> handler.handle(newRequest))
+				.flatMap((response) -> write(serverWebExchange, response));
+	}
+
 }

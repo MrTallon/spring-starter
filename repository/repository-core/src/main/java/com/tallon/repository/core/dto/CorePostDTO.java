@@ -18,6 +18,9 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class CorePostDTO extends CorePost implements Serializable {
-    private static final long serialVersionUID = 34667449769585688L;
-    private String username;
+
+	private static final long serialVersionUID = 34667449769585688L;
+
+	private String username;
+
 }
