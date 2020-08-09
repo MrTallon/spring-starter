@@ -30,7 +30,12 @@
         </developer>
     </developers>
 
+
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
         <!-- 需要打包进单体的服务 -->
         <dependency>
             <groupId>${project.groupId}</groupId>

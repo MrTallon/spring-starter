@@ -18,3 +18,15 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       connection-test-query: SELECT 1
+
+security:
+  oauth2:
+    client:
+      client-id: dashboard
+      client-secret: dashboard
+      access-token-uri: http://localhost:9090/oauth/token
+      user-authorization-uri: http://localhost:9090/oauth/authorize
+    resource:
+      token-info-uri: http://localhost:9090/oauth/check_token
+    authorization:
+      check-token-access: http://localhost:9090/oauth/check_token
