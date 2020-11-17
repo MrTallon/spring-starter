@@ -27,8 +27,8 @@ public class CorePostServiceImpl extends BaseServiceImpl<CorePostMapper, CorePos
 		Page<CorePostDTO> page = new Page<>(current, size);
 
 		LambdaQueryWrapper<CorePostDTO> wrapper = new LambdaQueryWrapper<>();
-		wrapper.like(StringUtils.isNotBlank(corePost.getPostTitle()), CorePostDTO::getPostTitle,
-				corePost.getPostTitle())
+		wrapper.like(StringUtils.isNotBlank(corePost.getPostTitle()),
+				CorePostDTO::getPostTitle, corePost.getPostTitle())
 				.and(StringUtils.isNotBlank(corePost.getPostStatus()),
 						i -> i.eq(CorePostDTO::getPostStatus, corePost.getPostStatus()))
 				.and(StringUtils.isNotBlank(corePost.getPostType()),

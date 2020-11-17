@@ -10,10 +10,12 @@ package com.tallon.common.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Data
+@NoArgsConstructor
 public class ResponseResult implements Serializable {
 
 	private static final long serialVersionUID = -9127050844792378533L;
@@ -39,9 +41,6 @@ public class ResponseResult implements Serializable {
 	 */
 	private Object data;
 
-	public ResponseResult() {
-		super();
-	}
 
 	/**
 	 * 一般的响应结果，不返回数据

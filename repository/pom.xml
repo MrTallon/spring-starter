@@ -33,7 +33,6 @@
     <!-- 服务模块 -->
     <modules>
         <module>repository-core</module>
-
     </modules>
 
     <dependencies>
