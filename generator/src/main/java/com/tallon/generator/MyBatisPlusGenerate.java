@@ -40,7 +40,7 @@ public class MyBatisPlusGenerate {
 	/**
 	 * JDBC 连接地址
 	 */
-	private static final String JDBC_URL = "jdbc:mysql://mysql.tallon.com:3307/starter?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&nullNamePatternMatchesAll=true&zeroDateTimeBehavior=CONVERT_TO_NULL&tinyInt1isBit=false&autoReconnect=true&useSSL=false&pinGlobalTxToPhysicalConnection=true";
+	private static final String JDBC_URL = "jdbc:mysql://mysql.tallon.com:3306/starter?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&nullNamePatternMatchesAll=true&zeroDateTimeBehavior=CONVERT_TO_NULL&tinyInt1isBit=false&autoReconnect=true&useSSL=false&pinGlobalTxToPhysicalConnection=true";
 
 	/**
 	 * JDBC 驱动程序
