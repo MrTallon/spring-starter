@@ -11,7 +11,10 @@ import com.tallon.common.response.ResponseCode;
 import com.tallon.repository.core.constant.UserStatus;
 import com.tallon.repository.core.domain.CoreAdmin;
 import com.tallon.repository.core.mapper.CoreAdminMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -24,7 +27,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CoreAdminServiceImpl extends BaseServiceImpl<CoreAdminMapper, CoreAdmin> implements ICoreAdminService {
 
-
+	@Resource
+	private BCryptPasswordEncoder encoder;
 	/**
 	 * 检查字段：用户名
 	 */
@@ -45,9 +49,10 @@ public class CoreAdminServiceImpl extends BaseServiceImpl<CoreAdminMapper, CoreA
 		if (!checkUsername(coreAdmin.getUsername()) && !checkNickname(coreAdmin.getNickname())
 				&& !checkEmail(coreAdmin.getEmail())) {
 			coreAdmin.setStatus(UserStatus.CLOSED);
+			// 密码加密
+			coreAdmin.setPassword(encoder.encode(coreAdmin.getPassword()));
 			return super.save(coreAdmin);
 		}
-
 		return false;
 	}
 

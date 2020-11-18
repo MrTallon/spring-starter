@@ -28,6 +28,7 @@
             <artifactId>repository-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 
     <profiles>

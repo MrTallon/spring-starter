@@ -11,13 +11,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
- * 认证服务器配置（全局拦截器）
+ * 认证服务器配置
  *
  * @author tallon
  * @version v1.0.0
  * @date 2020-08-09 11:35
  */
 @EnableWebSecurity
+//全局拦截器
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
