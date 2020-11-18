@@ -27,6 +27,7 @@ public class CoreAdminMapperTest {
     public void get1() {
         List<CoreAdmin> coreAdmins = mapper.selectList(null);
         coreAdmins.forEach(System.out::print);
+        CoreAdmin c = new CoreAdmin();
         Assert.assertNotNull(coreAdmins);
     }
 

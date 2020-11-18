@@ -17,8 +17,8 @@ public class DashboardControllerApplicationTest {
 
 	@Test
 	public void password() {
-		System.out.println(encoder.encode("dashboard"));
-		// $2a$10$73yLtnu8SQxT3FKprgXWUOoPmjkB38EykBeoCBcWirkZDe6aEvV7q
+		// TODO 生成token密码
+		System.out.println(encoder.encode("123456"));
 	}
 
 }

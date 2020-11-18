@@ -74,3 +74,5 @@ CREATE TABLE `oauth_refresh_token`
     `token`          blob,
     `authentication` blob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO starter.oauth_client_details (client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove) VALUES ('dashboard', null, '$2a$10$19dd3H1gRVXhBJgQnS50J.IoEINVFd1nBSBP7.Zs.unH/EYFW98ua', 'dashboard', 'password,refresh_token', null, null, 86400, 2592000, null, null);

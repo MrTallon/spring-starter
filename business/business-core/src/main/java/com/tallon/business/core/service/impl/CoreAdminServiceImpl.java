@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CoreAdminServiceImpl extends BaseServiceImpl<CoreAdminMapper, CoreAdmin> implements ICoreAdminService {
 
+
 	/**
 	 * 检查字段：用户名
 	 */
