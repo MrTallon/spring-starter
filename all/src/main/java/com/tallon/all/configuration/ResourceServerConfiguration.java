@@ -34,9 +34,10 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 		// http.exceptionHandling().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		// .and().authorizeRequests().antMatchers("/**").permitAll();
 
-		// 管理员授权请求路径
+		// TODO 管理员授权请求路径(此数据后期从数据库查出来)
 		String[] adminPaths = new String[] { "/core/**", "/qiniu/**" };
 
+		// SessionCreationPolicy.STATELESS session 不放任何东西
 		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry = http
 				.exceptionHandling().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().authorizeRequests();

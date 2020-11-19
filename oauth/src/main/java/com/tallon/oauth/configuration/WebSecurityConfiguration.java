@@ -44,7 +44,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         // 忽略的访问路径
         web.ignoring()
                 .antMatchers("/login/**")
-                .antMatchers("/registry/user")
                 .antMatchers("/logout/**")
                 .antMatchers("/core/admin/create")
                 .antMatchers("/core/user/create");
