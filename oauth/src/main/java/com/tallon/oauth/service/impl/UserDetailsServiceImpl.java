@@ -25,38 +25,36 @@ import java.util.List;
  */
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Resource
-	private CoreAdminMapper coreAdminMapper;
+    @Resource
+    private CoreAdminMapper coreAdminMapper;
 
-	@Resource
-	private CoreUserMapper coreUserMapper;
+    @Resource
+    private CoreUserMapper coreUserMapper;
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// 管理后台
-		LambdaQueryWrapper<CoreAdmin> adminWrapper = new LambdaQueryWrapper<>();
-		adminWrapper.eq(CoreAdmin::getUsername, username);
-		CoreAdmin coreAdmin = coreAdminMapper.selectOne(adminWrapper);
-		if (null != coreAdmin) {
-			// 授权，管理员权限为 ADMIN
-			List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-			grantedAuthorities.add(new SimpleGrantedAuthority("ADMIN"));
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // 管理后台
+        LambdaQueryWrapper<CoreAdmin> adminWrapper = new LambdaQueryWrapper<>();
+        adminWrapper.eq(CoreAdmin::getUsername, username);
+        CoreAdmin coreAdmin = coreAdminMapper.selectOne(adminWrapper);
+        if (null != coreAdmin) {
+            // 授权，管理员权限为 ADMIN
+            List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+            grantedAuthorities.add(new SimpleGrantedAuthority("ADMIN"));
 
-			// 由框架完成认证工作
-			return new User(coreAdmin.getUsername(), coreAdmin.getPassword(), grantedAuthorities);
-		}
+            // 由框架完成认证工作
+            return new User(coreAdmin.getUsername(), coreAdmin.getPassword(), grantedAuthorities);
+        }
 
-		// 门户网站
-		LambdaQueryWrapper<CoreUser> userWrapper = new LambdaQueryWrapper<>();
-		userWrapper.eq(CoreUser::getUsername, username);
-		CoreUser coreUser = coreUserMapper.selectOne(userWrapper);
-		if (null != coreUser) {
-			List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-			grantedAuthorities.add(new SimpleGrantedAuthority("USERS"));
-			return new User(coreUser.getUsername(), coreUser.getPassword(), grantedAuthorities);
-		}
-
-		return null;
-	}
-
+        // 门户网站
+        LambdaQueryWrapper<CoreUser> userWrapper = new LambdaQueryWrapper<>();
+        userWrapper.eq(CoreUser::getUsername, username);
+        CoreUser coreUser = coreUserMapper.selectOne(userWrapper);
+        if (null != coreUser) {
+            List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+            grantedAuthorities.add(new SimpleGrantedAuthority("USERS"));
+            return new User(coreUser.getUsername(), coreUser.getPassword(), grantedAuthorities);
+        }
+        return null;
+    }
 }
