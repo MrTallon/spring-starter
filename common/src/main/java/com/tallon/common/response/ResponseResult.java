@@ -41,7 +41,6 @@ public class ResponseResult implements Serializable {
 	 */
 	private Object data;
 
-
 	/**
 	 * 一般的响应结果，不返回数据
 	 * @param code {@link ResponseCode}

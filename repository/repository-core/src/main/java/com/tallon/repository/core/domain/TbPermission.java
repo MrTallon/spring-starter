@@ -20,29 +20,31 @@ import lombok.experimental.Accessors;
 @TableName("tb_permission")
 public class TbPermission extends BaseDomain {
 
-    private static final long serialVersionUID = 1889589835446748446L;
-    /**
-     * 父权限
-     */
-    private Long parentId;
+	private static final long serialVersionUID = 1889589835446748446L;
 
-    /**
-     * 权限名称
-     */
-    private String name;
+	/**
+	 * 父权限
+	 */
+	private Long parentId;
 
-    /**
-     * 权限英文名称
-     */
-    private String enname;
+	/**
+	 * 权限名称
+	 */
+	private String name;
 
-    /**
-     * 授权路径
-     */
-    private String url;
+	/**
+	 * 权限英文名称
+	 */
+	private String enname;
 
-    /**
-     * 备注
-     */
-    private String description;
+	/**
+	 * 授权路径
+	 */
+	private String url;
+
+	/**
+	 * 备注
+	 */
+	private String description;
+
 }

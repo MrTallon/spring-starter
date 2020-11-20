@@ -18,27 +18,30 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    // 由于这是单体打包器，将所有权限进行整合。分布式部署时每个项目单独管理权限
-    private static final String CusPermission = "CusPermission";
-    private static final String ClientPermission = "ClientPermission";
-    private static final String PostPermission = "PostPermission";
-    private static final String UserPermission = "UserPermission";
-    private static final String AdminPermission = "AdminPermission";
-    private static final String System = "System";
+	// 由于这是单体打包器，将所有权限进行整合。分布式部署时每个项目单独管理权限
+	private static final String CusPermission = "CusPermission";
 
+	private static final String ClientPermission = "ClientPermission";
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
+	private static final String PostPermission = "PostPermission";
 
-        // SessionCreationPolicy.STATELESS session 不放任何东西
-        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry = http
-                .exceptionHandling().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests()
-                .antMatchers("/core/cus/**").hasAnyAuthority(CusPermission)
-                .antMatchers("/core/client/**").hasAnyAuthority(ClientPermission)
-                .antMatchers("/core/post/**").hasAnyAuthority(PostPermission)
-                .antMatchers("/core/user/**").hasAnyAuthority(UserPermission)
-                .antMatchers("/core/admin/**").hasAnyAuthority(AdminPermission)
-                .antMatchers("/").hasAnyAuthority(System);
-    }
+	private static final String UserPermission = "UserPermission";
+
+	private static final String AdminPermission = "AdminPermission";
+
+	private static final String System = "System";
+
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+
+		// SessionCreationPolicy.STATELESS session 不放任何东西
+		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry = http
+				.exceptionHandling().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and().authorizeRequests().antMatchers("/core/cus/**").hasAnyAuthority(CusPermission)
+				.antMatchers("/core/client/**").hasAnyAuthority(ClientPermission).antMatchers("/core/post/**")
+				.hasAnyAuthority(PostPermission).antMatchers("/core/user/**").hasAnyAuthority(UserPermission)
+				.antMatchers("/core/admin/**").hasAnyAuthority(AdminPermission).antMatchers("/")
+				.hasAnyAuthority(System);
+	}
+
 }

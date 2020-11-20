@@ -29,6 +29,7 @@ public class CoreAdminServiceImpl extends BaseServiceImpl<CoreAdminMapper, CoreA
 
 	@Resource
 	private BCryptPasswordEncoder encoder;
+
 	/**
 	 * 检查字段：用户名
 	 */

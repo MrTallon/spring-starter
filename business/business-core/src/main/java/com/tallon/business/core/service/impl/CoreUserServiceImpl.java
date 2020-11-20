@@ -23,72 +23,70 @@ import javax.annotation.Resource;
 @Service
 public class CoreUserServiceImpl extends BaseServiceImpl<CoreUserMapper, CoreUser> implements ICoreUserService {
 
-    /**
-     * 检查字段：用户名
-     */
-    private static final String USERNAME = "username";
+	/**
+	 * 检查字段：用户名
+	 */
+	private static final String USERNAME = "username";
 
-    /**
-     * 检查字段：昵称
-     */
-    private static final String NICKNAME = "nickname";
+	/**
+	 * 检查字段：昵称
+	 */
+	private static final String NICKNAME = "nickname";
 
-    /**
-     * 检查字段：邮箱
-     */
-    private static final String EMAIL = "email";
+	/**
+	 * 检查字段：邮箱
+	 */
+	private static final String EMAIL = "email";
 
-    @Resource
-    private BCryptPasswordEncoder encoder;
+	@Resource
+	private BCryptPasswordEncoder encoder;
 
-    @Override
-    public boolean create(CoreUser coreUser) {
-        if (!checkUsername(coreUser.getUsername()) && !checkNickname(coreUser.getNickname())
-                && !checkEmail(coreUser.getEmail())) {
-            coreUser.setStatus(UserStatus.CLOSED);
-            // 密码加密
-            coreUser.setPassword(encoder.encode(coreUser.getPassword()));
-            return super.save(coreUser);
-        }
-        return false;
-    }
+	@Override
+	public boolean create(CoreUser coreUser) {
+		if (!checkUsername(coreUser.getUsername()) && !checkNickname(coreUser.getNickname())
+				&& !checkEmail(coreUser.getEmail())) {
+			coreUser.setStatus(UserStatus.CLOSED);
+			// 密码加密
+			coreUser.setPassword(encoder.encode(coreUser.getPassword()));
+			return super.save(coreUser);
+		}
+		return false;
+	}
 
-    /**
-     * 检查账号是否存在
-     *
-     * @param username {@code String} 账号
-     * @return {@code boolean} 账号已存在则抛出异常
-     */
-    private boolean checkUsername(String username) {
-        if (checkUniqueness(USERNAME, username)) {
-            throw new BusinessException(ResponseCode.USER_HAS_EXISTED);
-        }
-        return false;
-    }
+	/**
+	 * 检查账号是否存在
+	 * @param username {@code String} 账号
+	 * @return {@code boolean} 账号已存在则抛出异常
+	 */
+	private boolean checkUsername(String username) {
+		if (checkUniqueness(USERNAME, username)) {
+			throw new BusinessException(ResponseCode.USER_HAS_EXISTED);
+		}
+		return false;
+	}
 
-    /**
-     * 检查昵称是否存在
-     *
-     * @param nickname {@code String} 昵称
-     * @return {@code boolean} 昵称已存在则抛出异常
-     */
-    private boolean checkNickname(String nickname) {
-        if (checkUniqueness(NICKNAME, nickname)) {
-            throw new BusinessException(ResponseCode.USER_NICK_HAS_EXISTED);
-        }
-        return false;
-    }
+	/**
+	 * 检查昵称是否存在
+	 * @param nickname {@code String} 昵称
+	 * @return {@code boolean} 昵称已存在则抛出异常
+	 */
+	private boolean checkNickname(String nickname) {
+		if (checkUniqueness(NICKNAME, nickname)) {
+			throw new BusinessException(ResponseCode.USER_NICK_HAS_EXISTED);
+		}
+		return false;
+	}
 
-    /**
-     * 检查邮箱是否存在
-     *
-     * @param email {@code String} 邮箱
-     * @return {@code boolean} 邮箱已存在则抛出异常
-     */
-    private boolean checkEmail(String email) {
-        if (checkUniqueness(EMAIL, email)) {
-            throw new BusinessException(ResponseCode.USER_EMAIL_HAS_EXISTED);
-        }
-        return false;
-    }
+	/**
+	 * 检查邮箱是否存在
+	 * @param email {@code String} 邮箱
+	 * @return {@code boolean} 邮箱已存在则抛出异常
+	 */
+	private boolean checkEmail(String email) {
+		if (checkUniqueness(EMAIL, email)) {
+			throw new BusinessException(ResponseCode.USER_EMAIL_HAS_EXISTED);
+		}
+		return false;
+	}
+
 }

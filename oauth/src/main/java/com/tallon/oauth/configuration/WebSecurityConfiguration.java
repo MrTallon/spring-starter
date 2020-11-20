@@ -18,34 +18,32 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @date 2020-08-09 11:35
  */
 @EnableWebSecurity
-//全局拦截器
+// 全局拦截器
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    @Override
-    public UserDetailsService userDetailsServiceBean() {
-        return new UserDetailsServiceImpl();
-    }
+	@Bean
+	@Override
+	public UserDetailsService userDetailsServiceBean() {
+		return new UserDetailsServiceImpl();
+	}
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsServiceBean());
-    }
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsServiceBean());
+	}
 
-    @Override
-    public void configure(WebSecurity web) {
-        // 忽略的访问路径
-        web.ignoring()
-                .antMatchers("/login/**")
-                .antMatchers("/logout/**")
-                .antMatchers("/core/admin/create")
-                .antMatchers("/core/user/create");
-    }
+	@Override
+	public void configure(WebSecurity web) {
+		// 忽略的访问路径
+		web.ignoring().antMatchers("/login/**").antMatchers("/logout/**").antMatchers("/core/admin/create")
+				.antMatchers("/core/user/create");
+	}
+
 }

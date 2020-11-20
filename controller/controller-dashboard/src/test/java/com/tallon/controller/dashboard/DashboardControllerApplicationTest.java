@@ -31,4 +31,5 @@ public class DashboardControllerApplicationTest {
 		Object o = redisUtil.get("1");
 		System.out.println(o);
 	}
+
 }

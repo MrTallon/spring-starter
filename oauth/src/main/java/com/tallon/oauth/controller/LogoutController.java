@@ -21,33 +21,33 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class LogoutController {
 
-    @Resource
-    public TokenStore tokenStore;
+	@Resource
+	public TokenStore tokenStore;
 
-    @Resource
-    public HttpServletRequest request;
+	@Resource
+	public HttpServletRequest request;
 
-    /**
-     * 注销
-     *
-     * @return {@link ResponseResult}
-     */
-    @PostMapping("logout")
-    public ResponseResult userLogout() {
-        return logout();
-    }
+	/**
+	 * 注销
+	 * @return {@link ResponseResult}
+	 */
+	@PostMapping("logout")
+	public ResponseResult userLogout() {
+		return logout();
+	}
 
-    // 私有方法 ------------------------------------------- Begin
+	// 私有方法 ------------------------------------------- Begin
 
-    private ResponseResult logout() {
-        String token = Header.getAuthorization(request.getHeader("Authorization"));
+	private ResponseResult logout() {
+		String token = Header.getAuthorization(request.getHeader("Authorization"));
 
-        // 删除 token 以注销
-        OAuth2AccessToken oAuth2AccessToken = tokenStore.readAccessToken(token);
-        if (null != oAuth2AccessToken) {
-            tokenStore.removeAccessToken(oAuth2AccessToken);
-            return ResponseResult.success();
-        }
-        return ResponseResult.failure(ResponseCode.INTERFACE_ADDRESS_INVALID);
-    }
+		// 删除 token 以注销
+		OAuth2AccessToken oAuth2AccessToken = tokenStore.readAccessToken(token);
+		if (null != oAuth2AccessToken) {
+			tokenStore.removeAccessToken(oAuth2AccessToken);
+			return ResponseResult.success();
+		}
+		return ResponseResult.failure(ResponseCode.INTERFACE_ADDRESS_INVALID);
+	}
+
 }

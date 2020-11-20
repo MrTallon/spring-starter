@@ -26,40 +26,41 @@ import java.util.List;
  */
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Resource
-    private CoreAdminMapper coreAdminMapper;
+	@Resource
+	private CoreAdminMapper coreAdminMapper;
 
-    @Resource
-    private CoreUserMapper coreUserMapper;
+	@Resource
+	private CoreUserMapper coreUserMapper;
 
-    @Resource
-    private TbPermissionMapper tbPermissionMapper;
+	@Resource
+	private TbPermissionMapper tbPermissionMapper;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // 管理后台
-        LambdaQueryWrapper<CoreAdmin> adminWrapper = new LambdaQueryWrapper<>();
-        adminWrapper.eq(CoreAdmin::getUsername, username);
-        CoreAdmin coreAdmin = coreAdminMapper.selectOne(adminWrapper);
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// 管理后台
+		LambdaQueryWrapper<CoreAdmin> adminWrapper = new LambdaQueryWrapper<>();
+		adminWrapper.eq(CoreAdmin::getUsername, username);
+		CoreAdmin coreAdmin = coreAdminMapper.selectOne(adminWrapper);
+		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-        if (null != coreAdmin) {
-            // 从数据库取出该用户所有权限
-            List<String> permissions = tbPermissionMapper.tbAdminPermissions(coreAdmin.getId());
-            permissions.forEach(t -> grantedAuthorities.add(new SimpleGrantedAuthority(t)));
-            // 由框架完成认证工作
-            return new User(coreAdmin.getUsername(), coreAdmin.getPassword(), grantedAuthorities);
-        }
+		if (null != coreAdmin) {
+			// 从数据库取出该用户所有权限
+			List<String> permissions = tbPermissionMapper.tbAdminPermissions(coreAdmin.getId());
+			permissions.forEach(t -> grantedAuthorities.add(new SimpleGrantedAuthority(t)));
+			// 由框架完成认证工作
+			return new User(coreAdmin.getUsername(), coreAdmin.getPassword(), grantedAuthorities);
+		}
 
-        // 门户网站
-        LambdaQueryWrapper<CoreUser> userWrapper = new LambdaQueryWrapper<>();
-        userWrapper.eq(CoreUser::getUsername, username);
-        CoreUser coreUser = coreUserMapper.selectOne(userWrapper);
-        if (null != coreUser) {
-            List<String> permissions = tbPermissionMapper.tbUserPermissions(coreUser.getId());
-            permissions.forEach(t -> grantedAuthorities.add(new SimpleGrantedAuthority(t)));
-            return new User(coreUser.getUsername(), coreUser.getPassword(), grantedAuthorities);
-        }
-        return null;
-    }
+		// 门户网站
+		LambdaQueryWrapper<CoreUser> userWrapper = new LambdaQueryWrapper<>();
+		userWrapper.eq(CoreUser::getUsername, username);
+		CoreUser coreUser = coreUserMapper.selectOne(userWrapper);
+		if (null != coreUser) {
+			List<String> permissions = tbPermissionMapper.tbUserPermissions(coreUser.getId());
+			permissions.forEach(t -> grantedAuthorities.add(new SimpleGrantedAuthority(t)));
+			return new User(coreUser.getUsername(), coreUser.getPassword(), grantedAuthorities);
+		}
+		return null;
+	}
+
 }

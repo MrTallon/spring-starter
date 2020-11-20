@@ -15,17 +15,19 @@ import java.util.List;
  * @since 2020-11-19
  */
 public interface TbPermissionMapper extends BaseMapper<TbPermission> {
-    /**
-     * 查询管理员权限名称
-     * @param id 管理员id
-     * @return 权限名称列表
-     */
-    List<String> tbAdminPermissions(@Param("id") Long id);
 
-    /**
-     * 查询用户权限名称
-     * @param id 用户id
-     * @return 权限名称列表
-     */
-    List<String> tbUserPermissions(@Param("id") Long id);
+	/**
+	 * 查询管理员权限名称
+	 * @param id 管理员id
+	 * @return 权限名称列表
+	 */
+	List<String> tbAdminPermissions(@Param("id") Long id);
+
+	/**
+	 * 查询用户权限名称
+	 * @param id 用户id
+	 * @return 权限名称列表
+	 */
+	List<String> tbUserPermissions(@Param("id") Long id);
+
 }
