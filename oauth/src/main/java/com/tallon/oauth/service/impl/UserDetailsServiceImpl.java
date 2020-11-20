@@ -45,7 +45,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         if (null != coreAdmin) {
             // 从数据库取出该用户所有权限
-            List<String> permissions = tbPermissionMapper.tbPermissions(coreAdmin.getId());
+            List<String> permissions = tbPermissionMapper.tbAdminPermissions(coreAdmin.getId());
             permissions.forEach(t->grantedAuthorities.add(new SimpleGrantedAuthority(t)));
             // 由框架完成认证工作
             return new User(coreAdmin.getUsername(), coreAdmin.getPassword(), grantedAuthorities);
@@ -56,8 +56,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userWrapper.eq(CoreUser::getUsername, username);
         CoreUser coreUser = coreUserMapper.selectOne(userWrapper);
         if (null != coreUser) {
-            grantedAuthorities.add(new SimpleGrantedAuthority("USERS"));
-            return new User(coreUser.getUsername(), coreUser.getPassword(), grantedAuthorities);
+            List<String> permissions = tbPermissionMapper.tbUserPermissions(coreUser.getId());
+            permissions.forEach(t->grantedAuthorities.add(new SimpleGrantedAuthority(t)));            return new User(coreUser.getUsername(), coreUser.getPassword(), grantedAuthorities);
         }
         return null;
     }

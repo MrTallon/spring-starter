@@ -71,7 +71,7 @@ public class LoginServiceImpl implements ILoginService {
         String refresh = String.valueOf(jsonObject.get("refresh_token"));
         if (StrUtil.isNotBlank(token) && StrUtil.isNotBlank(refresh)) {
             // 将 refresh_token 保存在服务端redis
-            redisUtil.set(token + ":", refresh);
+            redisUtil.set(token, refresh);
 
             // 将 access_token 返回给客户端
             result.put("token", token);
@@ -102,14 +102,10 @@ public class LoginServiceImpl implements ILoginService {
         String token = String.valueOf(jsonObject.get("access_token"));
         String refresh = String.valueOf(jsonObject.get("refresh_token"));
         if (StrUtil.isNotBlank(token) && StrUtil.isNotBlank(refresh)) {
-            // 删除旧 Token
-//            refreshTokenMaps.remove(accessToken);
-            redisUtil.setRemove(accessToken);
-
+            // 移除旧token对应的refresh_token
+            redisUtil.del(accessToken);
             // 将 refresh_token 保存在服务端
-//            refreshTokenMaps.put(token, refresh);
-            redisUtil.set(token, refresh);
-
+            redisUtil.set(token, refresh, 2592000);
             // 将 access_token 返回给客户端
             result.put("token", token);
             return result;
