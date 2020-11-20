@@ -131,7 +131,7 @@
                         <version>${maven-javadoc-plugin.version}</version>
                         <configuration>
                             <!--  生成 HTML 后 title 的名字 -->
-                            <windowtitle>千锋达摩院 ${project.version} JavaDocs</windowtitle>
+                            <windowtitle>spring-starter ${project.version} JavaDocs</windowtitle>
                             <!-- 解决控制台乱码问题-->
                             <!-- 需要在【环境变量】中添加【系统变量】-->
                             <!-- - 变量名：JAVA_TOOL_OPTIONS-->

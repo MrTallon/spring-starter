@@ -45,12 +45,10 @@
             <scope>test</scope>
         </dependency>
 
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -58,13 +56,11 @@
             <scope>provided</scope>
         </dependency>
 
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-
 
         <dependency>
             <groupId>${project.groupId}</groupId>

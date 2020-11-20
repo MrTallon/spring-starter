@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: qfdmy-oauth
+    name: spring-starter-oauth
   main:
     allow-bean-definition-overriding: true
   datasource:
