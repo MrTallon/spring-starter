@@ -2,7 +2,6 @@ package com.tallon.all.configuration;
 
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -33,13 +32,16 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-
+// ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry =  无用
         // SessionCreationPolicy.STATELESS session 不放任何东西,适用于接口型无状态应用，节省资源
-        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry = http
-                .exceptionHandling().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        http.exceptionHandling().and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
                 // index登录即可访问
                 .antMatchers("/index").authenticated()
+                // TODO 15节课
+//                .anyRequest().access("@rbacService.has(request,authentication)")
+
                 .antMatchers("/core/cus/**").hasAnyAuthority(CusPermission)
                 .antMatchers("/core/client/**").hasAnyAuthority(ClientPermission)
                 .antMatchers("/core/post/**").hasAnyAuthority(PostPermission)
