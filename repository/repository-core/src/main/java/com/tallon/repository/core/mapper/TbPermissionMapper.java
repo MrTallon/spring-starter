@@ -30,4 +30,12 @@ public interface TbPermissionMapper extends BaseMapper<TbPermission> {
 	 */
 	List<String> tbUserPermissions(@Param("id") Long id);
 
+
+	/**
+	 * 查询管理员权限链接
+	 *
+	 * @param name 用户名称
+	 * @return 权限名称列表
+	 */
+	List<String> tbAdminPermissionUrls(@Param("name") String name);
 }

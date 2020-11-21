@@ -32,16 +32,16 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-// ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry =  无用
         // SessionCreationPolicy.STATELESS session 不放任何东西,适用于接口型无状态应用，节省资源
         http.exceptionHandling().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
                 // index登录即可访问
-                .antMatchers("/index").authenticated()
-                // TODO 15节课
-//                .anyRequest().access("@rbacService.has(request,authentication)")
+//                .antMatchers("/index").authenticated()
+                // 动态加载
+//                .anyRequest().access("@rbacService.hasPermission(request,authentication)");
 
+                // 以下内容需要数据库动态加载
                 .antMatchers("/core/cus/**").hasAnyAuthority(CusPermission)
                 .antMatchers("/core/client/**").hasAnyAuthority(ClientPermission)
                 .antMatchers("/core/post/**").hasAnyAuthority(PostPermission)

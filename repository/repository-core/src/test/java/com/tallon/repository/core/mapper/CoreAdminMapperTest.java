@@ -18,6 +18,9 @@ public class CoreAdminMapperTest {
 	@Resource
 	private CoreAdminMapper mapper;
 
+	@Resource
+	private TbPermissionMapper tbPermissionMapper;
+
 	@Test
 	public void test() {
 		System.out.println("Hello World");
@@ -28,5 +31,11 @@ public class CoreAdminMapperTest {
 		List<CoreAdmin> coreAdmins = mapper.selectList(null);
 		coreAdmins.forEach(System.out::print);
 		Assert.assertNotNull(coreAdmins);
+	}
+
+	@Test
+	public void get2() {
+		List<String> urls = tbPermissionMapper.tbAdminPermissionUrls("eric");
+		urls.forEach(System.out::println);
 	}
 }
